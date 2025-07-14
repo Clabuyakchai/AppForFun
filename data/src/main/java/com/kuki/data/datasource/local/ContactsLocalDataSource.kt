@@ -46,10 +46,11 @@ class ContactsLocalDataSource @Inject constructor() {
     )
 
     suspend fun fetchContacts(): List<ContactsDto> = withContext(Dispatchers.IO) {
-        List(100){
+        List(100) { index ->
             val name = names.random()
             val surname = createSurname(name)
             ContactsDto(
+                id = index.toString(),
                 name = name,
                 surname = surname,
                 phoneNumber = createPhoneNumber(),
@@ -59,7 +60,11 @@ class ContactsLocalDataSource @Inject constructor() {
     }
 
     private fun createPhoneNumber(): String {
-        return "+375 (${phoneCode.random()}) ${Random.nextInt(1000)}-${Random.nextInt(100)}-${Random.nextInt(100)}"
+        return "+375 (${phoneCode.random()}) ${Random.nextInt(1000)}-${Random.nextInt(100)}-${
+            Random.nextInt(
+                100
+            )
+        }"
     }
 
     private fun createSurname(name: String): String {

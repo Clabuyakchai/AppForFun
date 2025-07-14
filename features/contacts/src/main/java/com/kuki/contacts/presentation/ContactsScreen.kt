@@ -1,5 +1,6 @@
 package com.kuki.contacts.presentation
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -35,42 +36,53 @@ fun ContactsScreen(
     modifier: Modifier = Modifier,
     viewModel: ContactsViewModel = viewModelCompose {
         ContactsComponentHolder.contactsComponent.viewModelFactory().create()
-    }
+    },
+    onClick: (contactId: String) -> Unit
 ) {
     val state by viewModel.uiState.collectAsState()
 
-    ContactsContent(items = state.items, modifier)
+    ContactsContent(items = state.items, modifier = modifier, onClick = onClick)
 }
 
 @Composable
-fun ContactsContent(items: List<ContactEntry>, modifier: Modifier = Modifier) {
+fun ContactsContent(
+    items: List<ContactEntry>,
+    modifier: Modifier = Modifier,
+    onClick: (contactId: String) -> Unit
+) {
     Column(
         modifier = modifier.fillMaxSize()
     ) {
-        ListItems(items)
+        ListItems(items = items, onClick = onClick)
     }
 }
 
 @Composable
-fun ListItems(items: List<ContactEntry>, modifier: Modifier = Modifier) {
+fun ListItems(
+    items: List<ContactEntry>,
+    modifier: Modifier = Modifier,
+    onClick: (contactId: String) -> Unit
+) {
     LazyColumn(
         modifier = modifier
             .fillMaxSize()
     ) {
         items(count = items.size) { index ->
             Item(
-                model = items[index]
+                model = items[index],
+                onClick = { onClick.invoke(items[index].id) }
             )
         }
     }
 }
 
 @Composable
-fun Item(model: ContactEntry, modifier: Modifier = Modifier) {
+fun Item(model: ContactEntry, modifier: Modifier = Modifier, onClick: () -> Unit) {
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .wrapContentHeight(),
+            .wrapContentHeight()
+            .clickable { onClick.invoke() },
         verticalAlignment = Alignment.CenterVertically
     ) {
         Box(
@@ -110,12 +122,14 @@ fun ContactsPreview() {
         ContactsContent(
             items = listOf(
                 ContactEntry(
+                    id = "0",
                     name = "Влад",
                     surname = "Грибовский",
                     phoneNumber = "+375 44 123-34-56",
                     avatarUrl = ""
                 )
-            )
+            ),
+            onClick = {}
         )
     }
 }

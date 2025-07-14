@@ -1,17 +1,19 @@
 import com.kuki.buildsrc.Modules
+import com.kuki.buildsrc.SDK
 
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.kotlin.compose)
 }
 
 android {
     namespace = "com.kuki.contactdetail"
-    compileSdk = 35
+    compileSdk = SDK.COMPILE_SDK
 
     defaultConfig {
-        minSdk = 24
+        minSdk = SDK.MIN_SDK
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -32,6 +34,9 @@ android {
     }
     kotlinOptions {
         jvmTarget = "11"
+    }
+    buildFeatures {
+        compose = true
     }
 }
 

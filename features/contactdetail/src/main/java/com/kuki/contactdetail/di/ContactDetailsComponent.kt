@@ -1,9 +1,10 @@
 package com.kuki.contactdetail.di
 
+import com.kuki.contactdetail.presentation.ContactDetailsViewModel
 import com.kuki.domain.repository.ContactsRepository
 import dagger.Component
 
-@Component
+@Component(dependencies = [ContactsRepository::class])
 interface ContactDetailsComponent {
 
     @Component.Builder
@@ -15,4 +16,6 @@ interface ContactDetailsComponent {
     }
 
     fun contactsRepository(): ContactsRepository
+
+    fun viewModelFactory(): ContactDetailsViewModel.Factory
 }

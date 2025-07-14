@@ -4,6 +4,7 @@ import com.kuki.data.datasource.dto.contact.ContactsDto
 import com.kuki.domain.entry.contact.ContactEntry
 
 fun ContactsDto.toEntry() = ContactEntry(
+    id = this.id,
     name = this.name,
     surname = this.surname,
     phoneNumber = this.phoneNumber,

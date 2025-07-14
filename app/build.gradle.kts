@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.kapt)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.jetbrains.kotlin.serialization)
 }
 
 android {
@@ -53,6 +54,7 @@ dependencies {
     implementation(project(Modules.DATA))
     implementation(project(Modules.FEATURE_1))
     implementation(project(Modules.CONTACTS))
+    implementation(project(Modules.CONTACTS_DETAIL))
 
     //dagger
     implementation(libs.dagger)
@@ -63,6 +65,9 @@ dependencies {
 
     //Coroutines
     implementation(libs.bundles.coroutines)
+
+    //Nav3
+    implementation(libs.bundles.nav3)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

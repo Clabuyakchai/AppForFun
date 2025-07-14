@@ -6,8 +6,14 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.fragment.app.FragmentActivity
+import androidx.navigation3.runtime.NavEntry
+import androidx.navigation3.ui.NavDisplay
+import com.kuki.contactdetail.di.ContactDetailsComponent
+import com.kuki.contactdetail.presentation.ContactDetailsScreen
 import com.kuki.contacts.di.ContactsComponent
 import com.kuki.contacts.presentation.ContactsScreen
 import com.kuki.presentation.theme.TestAppTheme
@@ -28,6 +34,9 @@ class MainActivity : FragmentActivity() {
     @Inject
     lateinit var contactsComponent: ContactsComponent
 
+    @Inject
+    lateinit var contactDetailComponent: ContactDetailsComponent
+
     override fun onCreate(savedInstanceState: Bundle?) {
 
         val appComponent = (applicationContext as App).appComponent
@@ -44,9 +53,47 @@ class MainActivity : FragmentActivity() {
         setContent {
             TestAppTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    ContactsScreen(modifier = Modifier.padding(innerPadding))
+                    val backStack = remember { mutableStateListOf<Any>(ContactsNavModel) }
+
+                    NavDisplay(
+                        backStack = backStack,
+                        onBack = { backStack.removeLastOrNull() },
+                        entryProvider = { key ->
+                            when (key) {
+                                is ContactsNavModel -> NavEntry(key) {
+                                    ContactsScreen(
+                                        modifier = Modifier.padding(
+                                            innerPadding
+                                        ),
+                                        onClick = { contactId ->
+                                            backStack.add(
+                                                ContactDetailNavModel(
+                                                    contactId
+                                                )
+                                            )
+                                        }
+                                    )
+                                }
+
+                                is ContactDetailNavModel -> NavEntry(key) {
+                                    ContactDetailsScreen(
+                                        contactId = key.contactId,
+                                        modifier = Modifier.padding(innerPadding)
+                                    )
+                                }
+
+                                else -> throw IllegalStateException()
+                            }
+                        }
+                    )
+
+
                 }
             }
         }
     }
 }
+
+data object ContactsNavModel
+
+data class ContactDetailNavModel(val contactId: String)

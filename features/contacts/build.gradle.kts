@@ -1,4 +1,5 @@
 import com.kuki.buildsrc.Modules
+import com.kuki.buildsrc.SDK
 
 plugins {
     alias(libs.plugins.android.library)
@@ -9,10 +10,10 @@ plugins {
 
 android {
     namespace = "com.kuki.contacts"
-    compileSdk = 35
+    compileSdk = SDK.COMPILE_SDK
 
     defaultConfig {
-        minSdk = 24
+        minSdk = SDK.MIN_SDK
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
