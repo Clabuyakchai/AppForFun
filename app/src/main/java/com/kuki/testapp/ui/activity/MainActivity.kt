@@ -6,12 +6,15 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
-import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.fragment.app.FragmentActivity
+import androidx.lifecycle.viewmodel.navigation3.rememberViewModelStoreNavEntryDecorator
 import androidx.navigation3.runtime.NavEntry
+import androidx.navigation3.runtime.NavKey
+import androidx.navigation3.runtime.rememberNavBackStack
+import androidx.navigation3.runtime.rememberSavedStateNavEntryDecorator
 import androidx.navigation3.ui.NavDisplay
+import androidx.navigation3.ui.rememberSceneSetupNavEntryDecorator
 import com.kuki.contactdetail.di.ContactDetailsComponent
 import com.kuki.contactdetail.presentation.ContactDetailsScreen
 import com.kuki.contacts.di.ContactsComponent
@@ -21,6 +24,7 @@ import com.kuki.presentation.viewmodel.lazyViewModel
 import com.kuki.testapp.App
 import com.kuki.testapp.di.components.DaggerActivityComponent
 import com.kuki.testapp.ui.viewmodel.MainViewModel
+import kotlinx.serialization.Serializable
 import javax.inject.Inject
 
 class MainActivity : FragmentActivity() {
@@ -53,21 +57,26 @@ class MainActivity : FragmentActivity() {
         setContent {
             TestAppTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    val backStack = remember { mutableStateListOf<Any>(ContactsNavModel) }
+
+                    val backStack = rememberNavBackStack(ContactsScreenNavModel)
 
                     NavDisplay(
                         backStack = backStack,
-                        onBack = { backStack.removeLastOrNull() },
+                        entryDecorators = listOf(
+                            rememberSavedStateNavEntryDecorator(),
+                            rememberViewModelStoreNavEntryDecorator(),
+                            rememberSceneSetupNavEntryDecorator()
+                        ),
                         entryProvider = { key ->
                             when (key) {
-                                is ContactsNavModel -> NavEntry(key) {
+                                is ContactsScreenNavModel -> NavEntry(key) {
                                     ContactsScreen(
                                         modifier = Modifier.padding(
                                             innerPadding
                                         ),
                                         onClick = { contactId ->
                                             backStack.add(
-                                                ContactDetailNavModel(
+                                                ContactDetailsScreenNavModel(
                                                     contactId
                                                 )
                                             )
@@ -75,7 +84,7 @@ class MainActivity : FragmentActivity() {
                                     )
                                 }
 
-                                is ContactDetailNavModel -> NavEntry(key) {
+                                is ContactDetailsScreenNavModel -> NavEntry(key) {
                                     ContactDetailsScreen(
                                         contactId = key.contactId,
                                         modifier = Modifier.padding(innerPadding)
@@ -94,6 +103,8 @@ class MainActivity : FragmentActivity() {
     }
 }
 
-data object ContactsNavModel
+@Serializable
+data object ContactsScreenNavModel : NavKey
 
-data class ContactDetailNavModel(val contactId: String)
+@Serializable
+data class ContactDetailsScreenNavModel(val contactId: String) : NavKey

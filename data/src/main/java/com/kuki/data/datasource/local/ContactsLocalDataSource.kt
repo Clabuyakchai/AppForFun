@@ -45,18 +45,26 @@ class ContactsLocalDataSource @Inject constructor() {
         "https://img51994.kanal-o.ru/img/2020-06-29/fmt_81_24_shutterstock_547953349.jpg",
     )
 
+    private var contacts = emptyList<ContactsDto>()
+
     suspend fun fetchContacts(): List<ContactsDto> = withContext(Dispatchers.IO) {
-        List(100) { index ->
-            val name = names.random()
-            val surname = createSurname(name)
-            ContactsDto(
-                id = index.toString(),
-                name = name,
-                surname = surname,
-                phoneNumber = createPhoneNumber(),
-                avatarUrl = avatars.random()
-            )
-        }
+        contacts
+            .takeIf { it.isEmpty() }
+            ?.let {
+                contacts = List(100) { index ->
+                    val name = names.random()
+                    val surname = createSurname(name)
+                    ContactsDto(
+                        id = index.toString(),
+                        name = name,
+                        surname = surname,
+                        phoneNumber = createPhoneNumber(),
+                        avatarUrl = avatars.random()
+                    )
+                }
+                contacts
+            }
+            ?: contacts
     }
 
     private fun createPhoneNumber(): String {

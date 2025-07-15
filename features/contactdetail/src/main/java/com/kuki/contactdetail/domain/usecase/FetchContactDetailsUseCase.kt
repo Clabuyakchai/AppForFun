@@ -9,6 +9,6 @@ class FetchContactDetailsUseCase @Inject constructor(
 ) {
 
     suspend fun fetchContactDetails(contactId: String) : ContactEntry {
-        return contactsRepository.fetchContacts().get(contactId.toInt())
+        return contactsRepository.fetchContacts()[contactId.toInt()]
     }
 }

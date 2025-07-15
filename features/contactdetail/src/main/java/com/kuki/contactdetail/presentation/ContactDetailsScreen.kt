@@ -14,6 +14,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -36,7 +37,7 @@ fun ContactDetailsScreen(
 ) {
     val state by viewModel.uiState.collectAsState()
 
-    ContactDetailsContent(state = state)
+    ContactDetailsContent(state = state, modifier = modifier)
 }
 
 @Composable
@@ -64,6 +65,7 @@ private fun ProfileAvatar(url: String, modifier: Modifier = Modifier) {
         AsyncImage(
             model = url,
             contentDescription = "Profile avatar",
+            contentScale = ContentScale.Crop,
             modifier = Modifier
                 .fillMaxSize()
                 .clip(CircleShape)
