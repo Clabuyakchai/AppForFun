@@ -1,15 +1,14 @@
-import com.kuki.buildsrc.Modules
 import com.kuki.buildsrc.SDK
 
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.kapt)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.kotlin.kapt)
 }
 
 android {
-    namespace = "com.kuki.contacts"
+    namespace = "com.kuki.common"
     compileSdk = SDK.COMPILE_SDK
 
     defaultConfig {
@@ -35,38 +34,17 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
-    buildFeatures {
-        compose = true
-    }
 }
 
 dependencies {
 
-    implementation(project(Modules.CORE_COMMON))
-    implementation(project(Modules.CORE_PRESENTATION))
-    implementation(project(Modules.CORE_DOMAIN))
-
-    // Coil
-    implementation(libs.bundles.coil)
+    implementation(libs.androidx.fragment)
 
     //Dagger
     implementation(libs.dagger)
     kapt(libs.dagger.compiler)
 
-    //Coroutines
-    implementation(libs.bundles.coroutines)
-
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.lifecycle.runtime.ktx)
-
     //Compose
     implementation(libs.bundles.compose)
     implementation(platform(libs.androidx.compose.bom))
-
-
-    implementation(libs.androidx.appcompat)
-    implementation(libs.material)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
 }

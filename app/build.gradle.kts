@@ -49,10 +49,10 @@ android {
 
 dependencies {
 
+    implementation(project(Modules.CORE_COMMON))
     implementation(project(Modules.CORE_PRESENTATION))
     implementation(project(Modules.CORE_DOMAIN))
     implementation(project(Modules.DATA))
-    implementation(project(Modules.FEATURE_1))
     implementation(project(Modules.CONTACTS))
     implementation(project(Modules.CONTACTS_DETAIL))
 

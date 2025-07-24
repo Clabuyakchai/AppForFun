@@ -15,10 +15,10 @@ import androidx.navigation3.runtime.rememberNavBackStack
 import androidx.navigation3.runtime.rememberSavedStateNavEntryDecorator
 import androidx.navigation3.ui.NavDisplay
 import androidx.navigation3.ui.rememberSceneSetupNavEntryDecorator
-import com.kuki.contactdetail.di.ContactDetailsComponent
-import com.kuki.contactdetail.presentation.ContactDetailsScreen
-import com.kuki.contacts.di.ContactsComponent
-import com.kuki.contacts.presentation.ContactsScreen
+import com.kuki.common.DependenciesMap
+import com.kuki.common.HasDependencies
+import com.kuki.contactdetail.api.ContactDetailsScreen
+import com.kuki.contacts.api.ContactsScreen
 import com.kuki.presentation.theme.TestAppTheme
 import com.kuki.presentation.viewmodel.lazyViewModel
 import com.kuki.testapp.App
@@ -27,7 +27,7 @@ import com.kuki.testapp.ui.viewmodel.MainViewModel
 import kotlinx.serialization.Serializable
 import javax.inject.Inject
 
-class MainActivity : FragmentActivity() {
+class MainActivity : FragmentActivity(), HasDependencies {
 
     @Inject
     lateinit var factory: MainViewModel.Factory
@@ -36,10 +36,7 @@ class MainActivity : FragmentActivity() {
     }
 
     @Inject
-    lateinit var contactsComponent: ContactsComponent
-
-    @Inject
-    lateinit var contactDetailComponent: ContactDetailsComponent
+    override lateinit var dependenciesMap: DependenciesMap
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -52,7 +49,6 @@ class MainActivity : FragmentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
-        lifecycle.addObserver(viewModel)
 
         setContent {
             TestAppTheme {

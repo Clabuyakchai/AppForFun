@@ -4,11 +4,11 @@ object Modules {
     const val APP = ":app"
     const val DATA = ":data"
     private val CORE = ":core"
+    val CORE_COMMON = "$CORE:common"
     val CORE_PRESENTATION = "$CORE:presentation"
     val CORE_DATA = "$CORE:data"
     val CORE_DOMAIN = "$CORE:domain"
     private val FEATURES = ":features"
-    val FEATURE_1 = "$FEATURES:feature1"
     val CONTACTS = "$FEATURES:contacts"
     val CONTACTS_DETAIL = "$FEATURES:contactdetail"
 }

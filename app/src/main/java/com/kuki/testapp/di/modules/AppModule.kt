@@ -1,8 +1,5 @@
 package com.kuki.testapp.di.modules
 
-import com.kuki.contacts.di.ContactsComponentHolder
-import com.kuki.contacts.di.ContactsComponent
-import com.kuki.contacts.di.DaggerContactsComponent
 import com.kuki.data.di.component.DaggerRepositoryComponent
 import com.kuki.data.di.component.RepositoryComponent
 import com.kuki.data.di.module.RepositoryModule
@@ -20,11 +17,7 @@ class AppModule {
         return DaggerRepositoryComponent.builder().repositoryModule(RepositoryModule()).build()
     }
 
-//    @Provides
-//    fun provideRepository(repositoryComponent: RepositoryComponent): Repository {
-//        return repositoryComponent.repository()
-//    }
-
+    @Singleton
     @Provides
     fun provideContactsRepository(repositoryComponent: RepositoryComponent): ContactsRepository {
         return repositoryComponent.contactsRepository()

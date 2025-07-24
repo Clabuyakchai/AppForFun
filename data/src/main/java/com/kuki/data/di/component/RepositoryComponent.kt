@@ -10,5 +10,4 @@ import javax.inject.Singleton
 interface RepositoryComponent {
 
     fun contactsRepository(): ContactsRepository
-
 }
