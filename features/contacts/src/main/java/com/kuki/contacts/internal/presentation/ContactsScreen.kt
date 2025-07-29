@@ -1,8 +1,11 @@
 package com.kuki.contacts.internal.presentation
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -11,6 +14,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -29,6 +33,8 @@ import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
 import com.kuki.contacts.internal.di.ContactsComponentHolder
 import com.kuki.domain.entry.contact.ContactEntry
+import com.kuki.presentation.compose.Toolbar
+import com.kuki.presentation.theme.Pink80
 import com.kuki.presentation.viewmodel.viewModelCompose
 
 
@@ -52,8 +58,16 @@ private fun ContactsContent(
     onClick: (contactId: String) -> Unit
 ) {
     Column(
-        modifier = modifier.fillMaxSize()
+        modifier = modifier
+            .padding(horizontal = 10.dp)
+            .fillMaxSize()
     ) {
+        Toolbar(
+            text = "Contacts",
+            modifier = Modifier
+                .padding(vertical = 15.dp)
+        )
+
         ListItems(items = items, onClick = onClick)
     }
 }
@@ -66,7 +80,9 @@ private fun ListItems(
 ) {
     LazyColumn(
         modifier = modifier
-            .fillMaxSize()
+            .fillMaxSize(),
+        contentPadding = PaddingValues(top = 20.dp, bottom = 10.dp),
+        verticalArrangement = Arrangement.spacedBy(5.dp)
     ) {
         items(count = items.size) { index ->
             Item(
@@ -83,7 +99,12 @@ private fun Item(model: ContactEntry, modifier: Modifier = Modifier, onClick: ()
         modifier = modifier
             .fillMaxWidth()
             .wrapContentHeight()
-            .clickable { onClick.invoke() },
+            .clip(shape = RoundedCornerShape(10.dp))
+            .background(
+                color = Pink80.copy(alpha = 0.3f),
+            )
+            .clickable { onClick.invoke() }
+            .padding(all = 10.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Box(

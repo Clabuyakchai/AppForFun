@@ -24,6 +24,7 @@ import coil3.compose.AsyncImage
 import com.kuki.contactdetail.internal.di.ContactDetailComponentHolder
 import com.kuki.contactdetail.internal.presentation.model.ContactDetailUiState
 import com.kuki.domain.entry.contact.ContactEntry
+import com.kuki.presentation.compose.Toolbar
 import com.kuki.presentation.theme.TestAppTheme
 import com.kuki.presentation.viewmodel.viewModelCompose
 
@@ -41,14 +42,24 @@ internal fun ContactDetailsScreenPrivate(
 }
 
 @Composable
-internal fun ContactDetailsContent(state: ContactDetailUiState, modifier: Modifier = Modifier) {
+private fun ContactDetailsContent(state: ContactDetailUiState, modifier: Modifier = Modifier) {
     Column(
         modifier = modifier
             .fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+
+        Toolbar(
+            text = "Details",
+            modifier = Modifier
+                .padding(vertical = 15.dp),
+            onBackButtonClick = {}
+        )
+
         ProfileAvatar(
-            url = state.entry.avatarUrl
+            url = state.entry.avatarUrl,
+            modifier = Modifier
+                .padding(top = 20.dp)
         )
 
         Title(text = "${state.entry.name} ${state.entry.surname}")
