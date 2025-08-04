@@ -1,5 +1,6 @@
 package com.kuki.contactdetail.internal.presentation
 
+import android.content.Context
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -15,12 +16,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
+import com.kuki.common.findDependenciesTest
 import com.kuki.contactdetail.internal.di.ContactDetailComponentHolder
 import com.kuki.contactdetail.internal.presentation.model.ContactDetailUiState
 import com.kuki.domain.entry.contact.ContactEntry
@@ -32,17 +35,24 @@ import com.kuki.presentation.viewmodel.viewModelCompose
 internal fun ContactDetailsScreenPrivate(
     contactId: String,
     modifier: Modifier = Modifier,
+    onBackClick: () -> Unit,
+    context: Context = LocalContext.current,
     viewModel: ContactDetailsViewModel = viewModelCompose {
-        ContactDetailComponentHolder.contactsDetailHolder.viewModelFactory().create(contactId)
+        ContactDetailComponentHolder.getInstance(dependencies = findDependenciesTest(context))
+            .viewModelFactory().create(contactId)
     }
 ) {
     val state by viewModel.uiState.collectAsState()
 
-    ContactDetailsContent(state = state, modifier = modifier)
+    ContactDetailsContent(state = state, modifier = modifier, onBackClick = onBackClick)
 }
 
 @Composable
-private fun ContactDetailsContent(state: ContactDetailUiState, modifier: Modifier = Modifier) {
+private fun ContactDetailsContent(
+    state: ContactDetailUiState,
+    modifier: Modifier = Modifier,
+    onBackClick: () -> Unit
+) {
     Column(
         modifier = modifier
             .fillMaxSize(),
@@ -53,7 +63,7 @@ private fun ContactDetailsContent(state: ContactDetailUiState, modifier: Modifie
             text = "Details",
             modifier = Modifier
                 .padding(vertical = 15.dp),
-            onBackButtonClick = {}
+            onBackButtonClick = onBackClick
         )
 
         ProfileAvatar(
@@ -111,6 +121,6 @@ private fun ContactDetailsPreview() {
     )
 
     TestAppTheme {
-        ContactDetailsContent(ContactDetailUiState(contact))
+        ContactDetailsContent(ContactDetailUiState(contact), onBackClick = {})
     }
 }

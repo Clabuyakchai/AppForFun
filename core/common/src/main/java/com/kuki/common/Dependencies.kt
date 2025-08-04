@@ -27,6 +27,18 @@ inline fun <reified T : Dependencies> findDependencies(): T {
         )
 }
 
+inline fun <reified T : Dependencies> findDependenciesTest(context: Context): T {
+    val dependenciesClass = T::class.java
+    return context
+        .parents()
+        .firstNotNullOfOrNull { it.dependenciesMap[dependenciesClass] } as T?
+        ?: throw IllegalStateException(
+            "No Dependencies $dependenciesClass in ${
+                context.allParents().joinToString()
+            }"
+        )
+}
+
 fun Context.parents(): Iterable<HasDependencies> {
     return allParents().mapNotNull { it as? HasDependencies }
 }
