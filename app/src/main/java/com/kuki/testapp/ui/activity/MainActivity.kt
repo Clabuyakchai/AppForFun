@@ -1,22 +1,20 @@
 package com.kuki.testapp.ui.activity
 
 import android.os.Bundle
+import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.fragment.app.FragmentActivity
-import androidx.navigation3.runtime.NavKey
 import com.kuki.common.DependenciesMap
 import com.kuki.common.HasDependencies
-import com.kuki.presentation.theme.TestAppTheme
-import com.kuki.presentation.viewmodel.lazyViewModel
 import com.kuki.testapp.App
 import com.kuki.testapp.di.components.DaggerActivityComponent
 import com.kuki.testapp.ui.compose.MainScreen
 import com.kuki.testapp.ui.viewmodel.MainViewModel
-import kotlinx.serialization.Serializable
+import com.kuki.ui.theme.TestAppTheme
+import com.kuki.utils.viewmodel.lazyViewModel
 import javax.inject.Inject
 
-class MainActivity : FragmentActivity(), HasDependencies {
+class MainActivity : ComponentActivity(), HasDependencies {
 
     @Inject
     lateinit var factory: MainViewModel.Factory
@@ -45,9 +43,3 @@ class MainActivity : FragmentActivity(), HasDependencies {
         }
     }
 }
-
-@Serializable
-data object ContactsScreenNavModel : NavKey
-
-@Serializable
-data class ContactDetailsScreenNavModel(val contactId: String) : NavKey

@@ -26,11 +26,14 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "TestApp"
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS") // enable feature like this implementation(projects.core.common)
 include(":app")
 include(":core:common")
-include(":core:presentation")
 include(":core:data")
 include(":core:domain")
+include(":core:ui")
+include(":core:utils")
 include(":data")
 include(":features:contacts")
 include(":features:contactdetail")
+

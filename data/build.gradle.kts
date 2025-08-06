@@ -1,5 +1,3 @@
-import com.kuki.buildsrc.Modules
-
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
@@ -37,7 +35,7 @@ android {
 
 dependencies {
 
-    implementation(project(Modules.CORE_DOMAIN))
+    implementation(projects.core.domain)
 
     //Dagger
     implementation(libs.dagger)

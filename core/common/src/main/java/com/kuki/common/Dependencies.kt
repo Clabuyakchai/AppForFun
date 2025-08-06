@@ -20,7 +20,7 @@ inline fun <reified T : Dependencies> findDependencies(): T {
     return context
         .parents()
         .firstNotNullOfOrNull { it.dependenciesMap[dependenciesClass] } as T?
-        ?: throw IllegalStateException(
+        ?: throw error(
             "No Dependencies $dependenciesClass in ${
                 context.allParents().joinToString()
             }"
@@ -32,7 +32,7 @@ inline fun <reified T : Dependencies> findDependenciesTest(context: Context): T 
     return context
         .parents()
         .firstNotNullOfOrNull { it.dependenciesMap[dependenciesClass] } as T?
-        ?: throw IllegalStateException(
+        ?: throw error(
             "No Dependencies $dependenciesClass in ${
                 context.allParents().joinToString()
             }"

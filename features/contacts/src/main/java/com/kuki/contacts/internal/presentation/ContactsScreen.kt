@@ -33,9 +33,9 @@ import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
 import com.kuki.contacts.internal.di.ContactsComponentHolder
 import com.kuki.domain.entry.contact.ContactEntry
-import com.kuki.presentation.compose.Toolbar
-import com.kuki.presentation.theme.Pink80
-import com.kuki.presentation.viewmodel.viewModelCompose
+import com.kuki.ui.compose.Toolbar
+import com.kuki.ui.theme.Pink80
+import com.kuki.utils.viewmodel.viewModelCompose
 
 
 @Composable

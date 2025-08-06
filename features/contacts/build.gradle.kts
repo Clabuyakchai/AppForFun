@@ -1,4 +1,3 @@
-import com.kuki.buildsrc.Modules
 import com.kuki.buildsrc.SDK
 
 plugins {
@@ -42,9 +41,10 @@ android {
 
 dependencies {
 
-    implementation(project(Modules.CORE_COMMON))
-    implementation(project(Modules.CORE_PRESENTATION))
-    implementation(project(Modules.CORE_DOMAIN))
+    implementation(projects.core.common)
+    implementation(projects.core.ui)
+    implementation(projects.core.domain)
+    implementation(projects.core.utils)
 
     // Coil
     implementation(libs.bundles.coil)

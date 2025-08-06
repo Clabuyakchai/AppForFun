@@ -1,4 +1,3 @@
-import com.kuki.buildsrc.Modules
 import com.kuki.buildsrc.SDK
 
 plugins {
@@ -49,12 +48,13 @@ android {
 
 dependencies {
 
-    implementation(project(Modules.CORE_COMMON))
-    implementation(project(Modules.CORE_PRESENTATION))
-    implementation(project(Modules.CORE_DOMAIN))
-    implementation(project(Modules.DATA))
-    implementation(project(Modules.CONTACTS))
-    implementation(project(Modules.CONTACTS_DETAIL))
+    implementation(projects.core.common)
+    implementation(projects.core.ui)
+    implementation(projects.core.domain)
+    implementation(projects.core.utils)
+    implementation(projects.data)
+    implementation(projects.features.contacts)
+    implementation(projects.features.contactdetail)
 
     //dagger
     implementation(libs.dagger)
@@ -71,7 +71,6 @@ dependencies {
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
-    implementation(libs.androidx.fragment)
 
     //Compose
     implementation(libs.bundles.compose)

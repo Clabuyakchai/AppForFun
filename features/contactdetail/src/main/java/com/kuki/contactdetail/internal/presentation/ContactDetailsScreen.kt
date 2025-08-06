@@ -23,13 +23,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
-import com.kuki.common.findDependenciesTest
 import com.kuki.contactdetail.internal.di.ContactDetailComponentHolder
 import com.kuki.contactdetail.internal.presentation.model.ContactDetailUiState
 import com.kuki.domain.entry.contact.ContactEntry
-import com.kuki.presentation.compose.Toolbar
-import com.kuki.presentation.theme.TestAppTheme
-import com.kuki.presentation.viewmodel.viewModelCompose
+import com.kuki.ui.compose.Toolbar
+import com.kuki.ui.theme.TestAppTheme
+import com.kuki.utils.viewmodel.viewModelCompose
 
 @Composable
 internal fun ContactDetailsScreenPrivate(
@@ -38,8 +37,10 @@ internal fun ContactDetailsScreenPrivate(
     onBackClick: () -> Unit,
     context: Context = LocalContext.current,
     viewModel: ContactDetailsViewModel = viewModelCompose {
-        ContactDetailComponentHolder.getInstance(dependencies = findDependenciesTest(context))
-            .viewModelFactory().create(contactId)
+        ContactDetailComponentHolder
+            .getInstance()
+            .viewModelFactory()
+            .create(contactId)
     }
 ) {
     val state by viewModel.uiState.collectAsState()
