@@ -45,6 +45,7 @@ dependencies {
     implementation(projects.core.ui)
     implementation(projects.core.domain)
     implementation(projects.core.utils)
+    implementation(projects.core.di)
 
     // Coil
     implementation(libs.bundles.coil)

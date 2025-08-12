@@ -1,8 +1,8 @@
 package com.kuki.testapp.di.modules
 
-import com.kuki.common.Dependencies
-import com.kuki.common.DependenciesKey
 import com.kuki.contacts.api.ContactsDependencies
+import com.kuki.di.Dependencies
+import com.kuki.di.DependenciesKey
 import com.kuki.testapp.di.components.ActivityComponent
 import dagger.Binds
 import dagger.Module

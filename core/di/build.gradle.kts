@@ -4,10 +4,11 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.kotlin.kapt)
 }
 
 android {
-    namespace = "com.kuki.ui"
+    namespace = "com.kuki.di"
     compileSdk = SDK.COMPILE_SDK
 
     defaultConfig {
@@ -41,13 +42,10 @@ android {
 dependencies {
 
     //Compose
-    implementation(libs.bundles.compose)
+    implementation(libs.androidx.activity.compose)
     implementation(platform(libs.androidx.compose.bom))
 
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat)
-    implementation(libs.material)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
+    //Dagger
+    implementation(libs.dagger)
+    kapt(libs.dagger.compiler)
 }

@@ -1,11 +1,15 @@
 package com.kuki.contactdetail.api
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import com.kuki.common.findDependenciesTest
 import com.kuki.contactdetail.internal.di.ContactDetailComponentHolder
 import com.kuki.contactdetail.internal.presentation.ContactDetailsScreenPrivate
+import com.kuki.di.findDependencies
+import com.kuki.utils.compose.LocalComponentHolder
+
 
 @Composable
 fun ContactDetailsScreen(
@@ -13,28 +17,16 @@ fun ContactDetailsScreen(
     modifier: Modifier = Modifier,
     onBackClick: () -> Unit
 ) {
-
     val context = LocalContext.current
-//    var flag by remember { mutableStateOf(false) }
+    val component = remember { ContactDetailComponentHolder(findDependencies(context)) }
 
-//    DisposableEffect(contactId) {
-//        println("DisposableEffect contactId=$contactId")
-    ContactDetailComponentHolder.getInstance(dependencies = findDependenciesTest(context))
-//        flag = true
-//
-//        onDispose {
-//            println("DisposableEffect onDispose contactId=$contactId")
-//            ContactDetailComponentHolder.destroy()
-//            flag = false
-//        }
-//    }
-
-//    if (flag) {
-    ContactDetailsScreenPrivate(
-        contactId = contactId,
-        modifier = modifier,
-        onBackClick = onBackClick
-    )
-//    }
-
+    CompositionLocalProvider(
+        LocalComponentHolder provides component
+    ) {
+        ContactDetailsScreenPrivate(
+            contactId = contactId,
+            modifier = modifier,
+            onBackClick = onBackClick
+        )
+    }
 }

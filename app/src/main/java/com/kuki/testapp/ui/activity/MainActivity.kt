@@ -4,8 +4,8 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import com.kuki.common.DependenciesMap
-import com.kuki.common.HasDependencies
+import com.kuki.di.DependenciesMap
+import com.kuki.di.HasDependencies
 import com.kuki.testapp.App
 import com.kuki.testapp.di.components.DaggerActivityComponent
 import com.kuki.testapp.ui.compose.MainScreen

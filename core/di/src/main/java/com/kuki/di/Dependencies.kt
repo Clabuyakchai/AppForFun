@@ -1,4 +1,4 @@
-package com.kuki.common
+package com.kuki.di
 
 import android.app.Activity
 import android.content.Context
@@ -27,7 +27,7 @@ inline fun <reified T : Dependencies> findDependencies(): T {
         )
 }
 
-inline fun <reified T : Dependencies> findDependenciesTest(context: Context): T {
+inline fun <reified T : Dependencies> findDependencies(context: Context): T {
     val dependenciesClass = T::class.java
     return context
         .parents()

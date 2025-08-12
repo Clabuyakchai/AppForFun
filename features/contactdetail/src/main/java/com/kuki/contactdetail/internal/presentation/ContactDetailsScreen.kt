@@ -1,6 +1,5 @@
 package com.kuki.contactdetail.internal.presentation
 
-import android.content.Context
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -16,7 +15,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -28,6 +26,7 @@ import com.kuki.contactdetail.internal.presentation.model.ContactDetailUiState
 import com.kuki.domain.entry.contact.ContactEntry
 import com.kuki.ui.compose.Toolbar
 import com.kuki.ui.theme.TestAppTheme
+import com.kuki.utils.compose.LocalComponentHolder
 import com.kuki.utils.viewmodel.viewModelCompose
 
 @Composable
@@ -35,10 +34,9 @@ internal fun ContactDetailsScreenPrivate(
     contactId: String,
     modifier: Modifier = Modifier,
     onBackClick: () -> Unit,
-    context: Context = LocalContext.current,
+    component: ContactDetailComponentHolder = LocalComponentHolder.current as ContactDetailComponentHolder,
     viewModel: ContactDetailsViewModel = viewModelCompose {
-        ContactDetailComponentHolder
-            .getInstance()
+        component.contactDetailsComponent
             .viewModelFactory()
             .create(contactId)
     }
@@ -64,6 +62,7 @@ private fun ContactDetailsContent(
             text = "Details",
             modifier = Modifier
                 .padding(vertical = 15.dp),
+            showBackButton = true,
             onBackButtonClick = onBackClick
         )
 

@@ -1,8 +1,9 @@
 package com.kuki.contacts.internal.di
 
-internal object ContactsComponentHolder {
+import com.kuki.contacts.api.ContactsDependencies
+import com.kuki.utils.compose.ComponentHolder
 
-    var _contactsComponent: ContactsComponent? = null
-    val contactsComponent
-        get() = requireNotNull(_contactsComponent)
+internal class ContactsComponentHolder(dependencies: ContactsDependencies) : ComponentHolder {
+
+    val contactsComponent = DaggerContactsComponent.builder().dependencies(dependencies).build()
 }

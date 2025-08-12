@@ -1,4 +1,4 @@
-package com.kuki.common
+package com.kuki.di
 
 import kotlin.reflect.KClass
 

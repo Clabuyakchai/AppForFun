@@ -52,6 +52,7 @@ dependencies {
     implementation(projects.core.ui)
     implementation(projects.core.domain)
     implementation(projects.core.utils)
+    implementation(projects.core.di)
     implementation(projects.data)
     implementation(projects.features.contacts)
     implementation(projects.features.contactdetail)

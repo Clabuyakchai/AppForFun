@@ -32,7 +32,8 @@ import com.kuki.ui.R
 fun Toolbar(
     text: String,
     modifier: Modifier = Modifier,
-    onBackButtonClick: (() -> Unit)? = null
+    showBackButton: Boolean = false,
+    onBackButtonClick: () -> Unit
 ) {
     Row(
         modifier = modifier,
@@ -41,7 +42,7 @@ fun Toolbar(
 
         val mutableInteractionSource = remember { MutableInteractionSource() }
 
-        onBackButtonClick?.let {
+        if (showBackButton) {
             Box(
                 modifier = Modifier
                     .padding(end = 30.dp)

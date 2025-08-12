@@ -33,7 +33,9 @@ include(":core:data")
 include(":core:domain")
 include(":core:ui")
 include(":core:utils")
+include(":core:di")
 include(":data")
 include(":features:contacts")
 include(":features:contactdetail")
+
 

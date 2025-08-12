@@ -35,14 +35,16 @@ import com.kuki.contacts.internal.di.ContactsComponentHolder
 import com.kuki.domain.entry.contact.ContactEntry
 import com.kuki.ui.compose.Toolbar
 import com.kuki.ui.theme.Pink80
+import com.kuki.utils.compose.LocalComponentHolder
 import com.kuki.utils.viewmodel.viewModelCompose
 
 
 @Composable
 internal fun ContactsScreenPrivate(
     modifier: Modifier = Modifier,
+    componentHolder: ContactsComponentHolder = LocalComponentHolder.current as ContactsComponentHolder,
     viewModel: ContactsViewModel = viewModelCompose {
-        ContactsComponentHolder.contactsComponent.viewModelFactory().create()
+        componentHolder.contactsComponent.viewModelFactory().create()
     },
     onClick: (contactId: String) -> Unit
 ) {
@@ -65,7 +67,8 @@ private fun ContactsContent(
         Toolbar(
             text = "Contacts",
             modifier = Modifier
-                .padding(vertical = 15.dp)
+                .padding(vertical = 15.dp),
+            onBackButtonClick = {}
         )
 
         ListItems(items = items, onClick = onClick)

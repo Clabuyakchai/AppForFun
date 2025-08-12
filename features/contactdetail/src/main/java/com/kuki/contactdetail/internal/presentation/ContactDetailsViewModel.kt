@@ -18,7 +18,7 @@ internal class ContactDetailsViewModel @AssistedInject constructor(
     @Assisted contactId: String
 ) : ViewModel() {
 
-    private val _uiState = MutableStateFlow(ContactDetailUiState.createInitialState())
+    private val _uiState = MutableStateFlow(ContactDetailUiState())
     val uiState = _uiState.asStateFlow()
 
     init {
