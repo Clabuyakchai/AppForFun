@@ -1,5 +1,3 @@
-import com.kuki.buildsrc.SDK
-
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
@@ -7,10 +5,10 @@ plugins {
 
 android {
     namespace = "com.kuki.common"
-    compileSdk = SDK.COMPILE_SDK
+    compileSdk = 36
 
     defaultConfig {
-        minSdk = SDK.MIN_SDK
+        minSdk = 24
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")

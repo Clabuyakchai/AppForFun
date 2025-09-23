@@ -1,5 +1,4 @@
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-
 plugins {
     `kotlin-dsl`
 }
@@ -18,7 +17,9 @@ kotlin {
 }
 
 dependencies {
+//    compileOnly(gradleApi())
     compileOnly(libs.android.gradlePlugin)
+    compileOnly(libs.kotlin.gradlePlugin)
     compileOnly(libs.android.tools.common)
 }
 
@@ -33,7 +34,7 @@ gradlePlugin {
     plugins {
         register("androidLibraryCompose") {
             id = libs.plugins.appforfun.android.library.compose.get().pluginId
-            implementationClass = "com.kuki.buildLogic.AndroidLibraryComposeConventionPlugin"
+            implementationClass = "AndroidLibraryComposeConventionPlugin"
         }
     }
 }

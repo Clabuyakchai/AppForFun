@@ -1,4 +1,4 @@
-import com.kuki.buildsrc.SDK
+
 
 plugins {
     alias(libs.plugins.android.application)
@@ -10,12 +10,12 @@ plugins {
 
 android {
     namespace = "com.kuki.testapp"
-    compileSdk = SDK.COMPILE_SDK
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.kuki.testapp"
-        minSdk = SDK.MIN_SDK
-        targetSdk = SDK.TARGET_SDK
+        minSdk = 24
+        targetSdk = 36
         versionCode = 1
         versionName = "1.0"
 

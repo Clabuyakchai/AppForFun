@@ -47,7 +47,7 @@ internal fun ContactDetailsScreenPrivate(
 }
 
 @Composable
-private fun ContactDetailsContent(
+internal fun ContactDetailsContent(
     state: ContactDetailUiState,
     modifier: Modifier = Modifier,
     onBackClick: () -> Unit
@@ -121,6 +121,8 @@ private fun ContactDetailsPreview() {
     )
 
     TestAppTheme {
-        ContactDetailsContent(ContactDetailUiState(contact), onBackClick = {})
+        ContactDetailsContent(
+            ContactDetailUiState(isLoading = false, error = null, contact),
+            onBackClick = {})
     }
 }

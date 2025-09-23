@@ -43,4 +43,8 @@ dependencies {
 
     //Coroutines
     implementation(libs.bundles.coroutines)
+
+    //Unit tests
+    testImplementation(libs.junit)
+    testImplementation(libs.kotlinx.coroutines.test)
 }
