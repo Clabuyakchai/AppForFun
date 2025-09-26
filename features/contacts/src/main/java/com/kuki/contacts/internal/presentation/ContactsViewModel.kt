@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kuki.contacts.internal.domain.usecase.FetchContactsUseCase
 import com.kuki.contacts.internal.presentation.model.ContactsUiState
+import com.kuki.domain.usecase.call
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
 import kotlinx.coroutines.CoroutineExceptionHandler
@@ -22,7 +23,7 @@ internal class ContactsViewModel @AssistedInject constructor(
     init {
         viewModelScope.launch(CoroutineExceptionHandler { _, throwable -> }) {
             _uiState.update {
-                it.copy(items = fetchContactsUseCase.fetchContacts())
+                it.copy(items = fetchContactsUseCase.call())
             }
         }
     }

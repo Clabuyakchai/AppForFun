@@ -48,7 +48,7 @@ class ContactsLocalDataSourceImpl @Inject constructor(): ContactsLocalDataSource
 
     private var contacts = emptyList<ContactDto>()
 
-    override suspend fun fetchContacts(): List<ContactDto> = withContext(Dispatchers.IO) {
+    override suspend fun fetchContacts(): List<ContactDto> = withContext(Dispatchers.Default) {
         contacts
             .takeIf { it.isEmpty() }
             ?.let {

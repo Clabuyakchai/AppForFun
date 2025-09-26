@@ -1,7 +1,6 @@
 package com.kuki.data.repository.contact
 
 import com.kuki.data.datasource.local.ContactsLocalDataSource
-import com.kuki.data.datasource.local.impl.ContactsLocalDataSourceImpl
 import com.kuki.domain.entry.contact.ContactEntry
 import com.kuki.domain.repository.ContactsRepository
 import javax.inject.Inject

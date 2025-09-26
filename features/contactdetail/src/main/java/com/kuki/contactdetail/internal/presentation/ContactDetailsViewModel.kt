@@ -29,7 +29,8 @@ internal class ContactDetailsViewModel @AssistedInject constructor(
         }) {
             _uiState.update { it.copy(isLoading = true) }
             try {
-                val entry = fetchContactDetailsUseCase.fetchContactDetails(contactId)
+                val entry =
+                    fetchContactDetailsUseCase(param = FetchContactDetailsUseCase.Param(contactId))
                 _uiState.update {
                     it.copy(entry = entry, isLoading = false)
                 }
