@@ -34,7 +34,7 @@ android {
 }
 
 dependencies {
-
+    implementation(projects.core.di)
     implementation(projects.core.domain)
 
     //Dagger
@@ -47,4 +47,5 @@ dependencies {
     //Unit tests
     testImplementation(libs.junit)
     testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.mockk)
 }

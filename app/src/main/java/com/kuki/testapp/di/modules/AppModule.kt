@@ -16,8 +16,8 @@ class AppModule {
 
     @Singleton
     @Provides
-    fun provideRepositoryComponent(): RepositoryComponent {
-        return DaggerRepositoryComponent.builder().repositoryModule(RepositoryModule()).build()
+    fun provideRepositoryComponent(dispatchersProvider: DispatchersProvider): RepositoryComponent {
+        return DaggerRepositoryComponent.factory().create(dispatchersProvider)
     }
 
     @Singleton

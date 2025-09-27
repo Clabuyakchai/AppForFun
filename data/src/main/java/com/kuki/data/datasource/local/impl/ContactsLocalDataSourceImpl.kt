@@ -2,12 +2,15 @@ package com.kuki.data.datasource.local.impl
 
 import com.kuki.data.datasource.dto.contact.ContactDto
 import com.kuki.data.datasource.local.ContactsLocalDataSource
+import com.kuki.di.DispatchersProvider
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 import kotlin.random.Random
 
-class ContactsLocalDataSourceImpl @Inject constructor(): ContactsLocalDataSource {
+class ContactsLocalDataSourceImpl @Inject constructor(
+    private val dispatchersProvider: DispatchersProvider
+): ContactsLocalDataSource {
 
     private val names = listOf(
         "Александр", "Мария", "Иван", "Ольга", "Дмитрий", "Анна",
@@ -48,7 +51,7 @@ class ContactsLocalDataSourceImpl @Inject constructor(): ContactsLocalDataSource
 
     private var contacts = emptyList<ContactDto>()
 
-    override suspend fun fetchContacts(): List<ContactDto> = withContext(Dispatchers.Default) {
+    override suspend fun fetchContacts(): List<ContactDto> = withContext(dispatchersProvider.computation()) {
         contacts
             .takeIf { it.isEmpty() }
             ?.let {
