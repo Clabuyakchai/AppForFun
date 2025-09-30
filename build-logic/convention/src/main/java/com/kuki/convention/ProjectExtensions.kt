@@ -1,4 +1,4 @@
-package com.kuki.buildsrc
+package com.kuki.buildsrc.com.kuki.convention
 
 import org.gradle.api.Project
 import org.gradle.api.artifacts.VersionCatalog

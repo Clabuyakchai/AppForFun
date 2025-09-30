@@ -1,7 +1,7 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.appforfun.android.dagger)
 }
 
 android {
@@ -34,13 +34,14 @@ android {
 }
 
 dependencies {
-
+    implementation(projects.core.di)
     implementation(projects.core.domain)
-
-    //Dagger
-    implementation(libs.dagger)
-    kapt(libs.dagger.compiler)
 
     //Coroutines
     implementation(libs.bundles.coroutines)
+
+    //Unit tests
+    testImplementation(libs.junit)
+    testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.mockk)
 }

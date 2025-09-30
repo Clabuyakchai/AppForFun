@@ -22,9 +22,22 @@ internal class ContactDetailsViewModel @AssistedInject constructor(
     val uiState = _uiState.asStateFlow()
 
     init {
-        viewModelScope.launch(CoroutineExceptionHandler { _, throwable -> }) {
+        viewModelScope.launch(CoroutineExceptionHandler { _, throwable ->
             _uiState.update {
-                it.copy(entry = fetchContactDetailsUseCase.fetchContactDetails(contactId))
+                it.copy(isLoading = false, error = throwable.message)
+            }
+        }) {
+            _uiState.update { it.copy(isLoading = true) }
+            try {
+                val entry =
+                    fetchContactDetailsUseCase(param = FetchContactDetailsUseCase.Param(contactId))
+                _uiState.update {
+                    it.copy(entry = entry, isLoading = false)
+                }
+            } catch (e: Exception) {
+                _uiState.update {
+                    it.copy(isLoading = false, error = e.message)
+                }
             }
         }
     }
