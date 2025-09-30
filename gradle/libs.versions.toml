@@ -1,5 +1,5 @@
 [versions]
-agp = "8.10.1"
+agp = "8.13.0"
 androidTools = "31.12.1"
 kotlin = "2.2.0"
 coreKtx = "1.16.0"
@@ -93,7 +93,9 @@ android-library = { id = "com.android.library", version.ref = "agp" }
 jetbrains-kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlinSerialization" }
 
 # plugins in project
+appforfun-android-application-compose = { id = "appforfun.android.application.compose" }
 appforfun-android-library-compose = { id = "appforfun.android.library.compose" }
+appforfun-android-dagger = { id = "appforfun.android.dagger" }
 
 [bundles]
 compose = [

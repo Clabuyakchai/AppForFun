@@ -1,8 +1,7 @@
 plugins {
-    alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.compose)
-    alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.appforfun.android.library.compose)
+    alias(libs.plugins.appforfun.android.dagger)
 }
 
 android {
@@ -32,18 +31,8 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
-    buildFeatures {
-        compose = true
-    }
 }
 
 dependencies {
 
-    //Compose
-    implementation(libs.androidx.activity.compose)
-    implementation(platform(libs.androidx.compose.bom))
-
-    //Dagger
-    implementation(libs.dagger)
-    kapt(libs.dagger.compiler)
 }

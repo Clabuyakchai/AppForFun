@@ -1,7 +1,6 @@
 plugins {
-    alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.appforfun.android.library.compose)
 }
 
 android {
@@ -31,17 +30,12 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
-    buildFeatures {
-        compose = true
-    }
 }
 
 dependencies {
 
     //Compose
-    implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.lifecycle.viewModelCompose)
-    implementation(platform(libs.androidx.compose.bom))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

@@ -1,10 +1,7 @@
-
-
 plugins {
-    alias(libs.plugins.android.application)
+    alias(libs.plugins.appforfun.android.application.compose)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.kapt)
-    alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.appforfun.android.dagger)
     alias(libs.plugins.jetbrains.kotlin.serialization)
 }
 
@@ -41,9 +38,6 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
-    buildFeatures {
-        compose = true
-    }
 }
 
 dependencies {
@@ -57,10 +51,6 @@ dependencies {
     implementation(projects.features.contacts)
     implementation(projects.features.contactdetail)
 
-    //dagger
-    implementation(libs.dagger)
-    kapt(libs.dagger.compiler)
-
     // Coil
     implementation(libs.bundles.coil)
 
@@ -72,10 +62,6 @@ dependencies {
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
-
-    //Compose
-    implementation(libs.bundles.compose)
-    implementation(platform(libs.androidx.compose.bom))
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

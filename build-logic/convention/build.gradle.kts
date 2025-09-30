@@ -32,9 +32,17 @@ tasks {
 
 gradlePlugin {
     plugins {
+        register("androidApplicationCompose") {
+            id = libs.plugins.appforfun.android.application.compose.get().pluginId
+            implementationClass = "com.kuki.buildsrc.AndroidApplicationComposeConventionPlugin"
+        }
         register("androidLibraryCompose") {
             id = libs.plugins.appforfun.android.library.compose.get().pluginId
-            implementationClass = "AndroidLibraryComposeConventionPlugin"
+            implementationClass = "com.kuki.buildsrc.AndroidLibraryComposeConventionPlugin"
+        }
+        register("androidLibraryDagger") {
+            id = libs.plugins.appforfun.android.dagger.get().pluginId
+            implementationClass = "com.kuki.buildsrc.AndroidDaggerConventionPlugin"
         }
     }
 }

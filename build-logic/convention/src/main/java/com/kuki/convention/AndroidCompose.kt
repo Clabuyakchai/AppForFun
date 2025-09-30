@@ -1,4 +1,4 @@
-package com.kuki.buildsrc
+package com.kuki.buildsrc.com.kuki.convention
 
 import com.android.build.api.dsl.CommonExtension
 import org.gradle.api.Project
