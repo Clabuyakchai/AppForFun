@@ -1,8 +1,7 @@
-package com.kuki.testapp.di.modules
+package com.kuki.testapp.di.module
 
 import com.kuki.data.di.component.DaggerRepositoryComponent
 import com.kuki.data.di.component.RepositoryComponent
-import com.kuki.data.di.module.RepositoryModule
 import com.kuki.di.DaggerDiComponent
 import com.kuki.di.DiComponent
 import com.kuki.di.DispatchersProvider

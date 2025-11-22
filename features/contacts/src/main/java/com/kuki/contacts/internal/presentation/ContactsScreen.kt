@@ -32,6 +32,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
 import com.kuki.contacts.internal.di.ContactsComponentHolder
+import com.kuki.contacts.internal.presentation.model.ContactsUiState
 import com.kuki.domain.entry.contact.ContactEntry
 import com.kuki.ui.compose.Toolbar
 import com.kuki.ui.theme.Pink80
@@ -50,12 +51,12 @@ internal fun ContactsScreenPrivate(
 ) {
     val state by viewModel.uiState.collectAsState()
 
-    ContactsContent(items = state.items, modifier = modifier, onClick = onClick)
+    ContactsContent(state = state, modifier = modifier, onClick = onClick)
 }
 
 @Composable
 private fun ContactsContent(
-    items: List<ContactEntry>,
+    state: ContactsUiState,
     modifier: Modifier = Modifier,
     onClick: (contactId: String) -> Unit
 ) {
@@ -71,7 +72,14 @@ private fun ContactsContent(
             onBackButtonClick = {}
         )
 
-        ListItems(items = items, onClick = onClick)
+        when (state) {
+            ContactsUiState.Error -> {}
+            ContactsUiState.Loading -> {}
+            is ContactsUiState.Success -> {
+                ListItems(items = state.items, onClick = onClick)
+            }
+
+        }
     }
 }
 
@@ -145,13 +153,15 @@ private fun Item(model: ContactEntry, modifier: Modifier = Modifier, onClick: ()
 private fun ContactsPreview() {
     Surface {
         ContactsContent(
-            items = listOf(
-                ContactEntry(
-                    id = "0",
-                    name = "Влад",
-                    surname = "Грибовский",
-                    phoneNumber = "+375 44 123-34-56",
-                    avatarUrl = ""
+            state = ContactsUiState.Success(
+                items = listOf(
+                    ContactEntry(
+                        id = "0",
+                        name = "Влад",
+                        surname = "Грибовский",
+                        phoneNumber = "+375 44 123-34-56",
+                        avatarUrl = ""
+                    )
                 )
             ),
             onClick = {}

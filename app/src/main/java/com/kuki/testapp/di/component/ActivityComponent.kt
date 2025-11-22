@@ -1,12 +1,12 @@
-package com.kuki.testapp.di.components
+package com.kuki.testapp.di.component
 
 import com.kuki.contactdetail.api.ContactDetailsDependencies
 import com.kuki.contacts.api.ContactsDependencies
 import com.kuki.testapp.di.contract.inject.ActivityInjectContract
 import com.kuki.testapp.di.contract.provide.AppProvideContract
-import com.kuki.testapp.di.modules.ContactDetailsDependenciesBindingModule
-import com.kuki.testapp.di.modules.ContactsDependenciesBindingModule
-import com.kuki.testapp.di.scopes.ActivityScope
+import com.kuki.testapp.di.module.ContactDetailsDependenciesBindingModule
+import com.kuki.testapp.di.module.ContactsDependenciesBindingModule
+import com.kuki.testapp.di.scope.ActivityScope
 import dagger.Component
 
 @ActivityScope

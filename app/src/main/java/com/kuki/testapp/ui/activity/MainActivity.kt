@@ -7,7 +7,7 @@ import androidx.activity.enableEdgeToEdge
 import com.kuki.di.DependenciesMap
 import com.kuki.di.HasDependencies
 import com.kuki.testapp.App
-import com.kuki.testapp.di.components.DaggerActivityComponent
+import com.kuki.testapp.di.component.DaggerActivityComponent
 import com.kuki.testapp.ui.compose.MainScreen
 import com.kuki.testapp.ui.viewmodel.MainViewModel
 import com.kuki.ui.theme.TestAppTheme

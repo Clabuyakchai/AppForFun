@@ -34,12 +34,12 @@ android {
 }
 
 dependencies {
-
     implementation(projects.core.common)
     implementation(projects.core.ui)
     implementation(projects.core.domain)
     implementation(projects.core.utils)
     implementation(projects.core.di)
+    testImplementation(projects.core.testing)
 
     // Coil
     implementation(libs.bundles.coil)
@@ -52,7 +52,12 @@ dependencies {
 
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
+
+    //Tests
     testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
+    testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.mockk)
+    testImplementation(libs.turbine)
+    testImplementation(libs.kotlin.test.junit)
+
 }

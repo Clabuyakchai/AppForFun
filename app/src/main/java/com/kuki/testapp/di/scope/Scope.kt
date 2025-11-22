@@ -1,4 +1,4 @@
-package com.kuki.testapp.di.scopes
+package com.kuki.testapp.di.scope
 
 import javax.inject.Scope
 

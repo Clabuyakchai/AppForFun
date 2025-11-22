@@ -10,21 +10,22 @@ import dagger.assisted.AssistedInject
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 internal class ContactsViewModel @AssistedInject constructor(
     private val fetchContactsUseCase: FetchContactsUseCase
 ) : ViewModel() {
 
-    private val _uiState = MutableStateFlow(ContactsUiState())
+    private val _uiState = MutableStateFlow<ContactsUiState>(ContactsUiState.Loading)
     val uiState = _uiState.asStateFlow()
 
     init {
-        viewModelScope.launch(CoroutineExceptionHandler { _, throwable -> }) {
-            _uiState.update {
-                it.copy(items = fetchContactsUseCase.call())
-            }
+        viewModelScope.launch(CoroutineExceptionHandler { _, throwable ->
+            _uiState.value = ContactsUiState.Error
+        }) {
+            _uiState.value = ContactsUiState.Success(
+                items = fetchContactsUseCase.call()
+            )
         }
     }
 

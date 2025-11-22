@@ -68,7 +68,13 @@ class ContactDetailsViewModelTest {
             )
 
             // Arrange: Mock the use case to return successfully
-            coEvery { mockFetchContactDetailsUseCase.invoke(FetchContactDetailsUseCase.Param(testContactId)) } returns expectedContactDetails
+            coEvery {
+                mockFetchContactDetailsUseCase.invoke(
+                    FetchContactDetailsUseCase.Param(
+                        testContactId
+                    )
+                )
+            } returns expectedContactDetails
 
             // Act
             viewModel = createViewModel()
@@ -105,7 +111,13 @@ class ContactDetailsViewModelTest {
             val exception = RuntimeException(errorMessage)
 
             // Arrange: Mock the use case to throw an exception
-            coEvery { mockFetchContactDetailsUseCase.invoke(FetchContactDetailsUseCase.Param(testContactId)) } throws exception
+            coEvery {
+                mockFetchContactDetailsUseCase.invoke(
+                    FetchContactDetailsUseCase.Param(
+                        testContactId
+                    )
+                )
+            } throws exception
 
             // Act
             viewModel = createViewModel()

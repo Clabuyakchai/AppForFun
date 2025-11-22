@@ -1,8 +1,8 @@
-package com.kuki.testapp.di.components
+package com.kuki.testapp.di.component
 
 import android.content.Context
 import com.kuki.testapp.di.contract.provide.AppProvideContract
-import com.kuki.testapp.di.modules.AppModule
+import com.kuki.testapp.di.module.AppModule
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
