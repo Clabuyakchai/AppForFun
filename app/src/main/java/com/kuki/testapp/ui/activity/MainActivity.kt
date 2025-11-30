@@ -6,7 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import com.kuki.di.DependenciesMap
 import com.kuki.di.HasDependencies
-import com.kuki.testapp.App
+import com.kuki.testapp.di.component.AppComponentProvider
 import com.kuki.testapp.di.component.DaggerActivityComponent
 import com.kuki.testapp.ui.compose.MainScreen
 import com.kuki.testapp.ui.viewmodel.MainViewModel
@@ -27,9 +27,9 @@ class MainActivity : ComponentActivity(), HasDependencies {
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
-        val appComponent = (applicationContext as App).appComponent
+        val appComponentProvider = applicationContext as AppComponentProvider
         val component = DaggerActivityComponent.builder()
-            .appProvideContract(appComponent)
+            .appProvideContract(appComponentProvider.provideAppComponentContract())
             .build()
         component.inject(this)
 
