@@ -36,4 +36,7 @@ android {
 dependencies {
     implementation(projects.core.di)
     implementation(projects.core.domain)
+
+    //Coroutines
+    implementation(libs.bundles.coroutines)
 }
